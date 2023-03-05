@@ -127,7 +127,7 @@ capture.addEventListener("click", async () => {
             height: { ideal: 1080 },
             cursor: "always"
         },
-        audio: false
+        audio: true
     }
     
     // Create MediaStream
