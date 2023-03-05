@@ -5,7 +5,7 @@ const remoteVideo = document.getElementById("remote-video");
 const videos = document.querySelectorAll("video");
 
 // Make socket connection (which will function as signaling channel)
-var socket = io.connect('http://localhost:4000');
+var socket = io.connect('http://naitzirch.ddns.net');
 
 // Array of users
 let userArray = [];
