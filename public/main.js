@@ -127,7 +127,12 @@ capture.addEventListener("click", async () => {
             height: { ideal: 1080 },
             cursor: "always"
         },
-        audio: true
+        audio: {
+            autoGainControl: false,
+            echoCancellation: false,
+            googAutoGainControl: false,
+            noiseSuppresion: false
+        }
     }
     
     // Create MediaStream
