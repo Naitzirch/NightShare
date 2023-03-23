@@ -123,8 +123,8 @@ capture.addEventListener("click", async () => {
     const constraints = {
         video: {
             frameRate: 60,
-            width: { exact: 1920 },
-            height: { exact: 1080 },
+            width: 1920,
+            height: 1080,
             cursor: "always"
         },
         audio: {
