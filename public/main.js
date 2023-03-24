@@ -133,7 +133,7 @@ capture.addEventListener("click", async () => {
             googAutoGainControl: false,
             noiseSuppresion: false
         },
-        surfaceSwitching: exclude
+        surfaceSwitching: "exclude"
     }
     
     // Create MediaStream
