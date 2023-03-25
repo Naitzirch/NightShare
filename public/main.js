@@ -122,6 +122,7 @@ capture.addEventListener("click", async () => {
 
     const constraints = {
         video: {
+            frameRate: {min: 24, ideal: 30, max: 60},
             cursor: "always"
         },
         audio: {
@@ -136,7 +137,7 @@ capture.addEventListener("click", async () => {
     let captureStream = await start(constraints);
 
     // Update frontend
-    localVideo.srcObject = captureStream;
+    // localVideo.srcObject = captureStream;
 
     // Connect to remote peer
     for (const track of captureStream.getTracks()) {
