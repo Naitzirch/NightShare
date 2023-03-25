@@ -117,15 +117,21 @@ async function start(constraints) {
 
 /* EVENT LISTENERS */
 
+
+// {
+//     resizeMode: "none",
+//     frameRate: {ideal: 30, max: 60},
+//     width: { ideal: 1920, max: 1920 },
+//     height: { ideal: 1080, max: 1080 },
+//     cursor: "always"
+// }
+
 // When the capture button is clicked
 capture.addEventListener("click", async () => {
 
     const constraints = {
         video: {
-            resizeMode: "none",
             frameRate: {ideal: 30, max: 60},
-            width: { ideal: 1920, max: 1920 },
-            height: { ideal: 1080, max: 1080 },
             cursor: "always"
         },
         audio: {
