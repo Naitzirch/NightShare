@@ -130,7 +130,7 @@ async function start(constraints) {
 // When the capture button is clicked
 capture.addEventListener("click", async () => {
     
-    const constraints = settings.innerText;
+    const constraints = JSON.parse(settings.innerText);
     console.log(constraints);
 
     // Create MediaStream
