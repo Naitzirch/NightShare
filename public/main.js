@@ -3,6 +3,7 @@ const capture = document.getElementById("capture");
 const localVideo = document.getElementById("local-video");
 const remoteVideo = document.getElementById("remote-video");
 const videos = document.querySelectorAll("video");
+const settings = document.getElementById("settings");
 
 // Make socket connection (which will function as signaling channel)
 var socket = io.connect('http://naitzirch.ddns.net', { secure: false, port: 80});
@@ -128,22 +129,10 @@ async function start(constraints) {
 
 // When the capture button is clicked
 capture.addEventListener("click", async () => {
-
-    const constraints = {
-        video: {
-            frameRate: {ideal: 30, max: 30},
-            width: { max: 1280 },
-            height: { max: 720 },
-            cursor: "always"
-        },
-        audio: {
-            autoGainControl: false,
-            echoCancellation: false,
-            googAutoGainControl: false,
-            noiseSuppresion: false
-        }
-    }
     
+    const constraints = settings.innerText;
+    console.log(constraints);
+
     // Create MediaStream
     let captureStream = await start(constraints);
 

@@ -17,7 +17,24 @@
         <video id="remote-video" muted autoplay controls></video>
     </div>
     <button id="capture">Capture</button>
-    
+
+<!-- start code block -->
+<pre contenteditable="true" spellcheck="false"><code id="settings">{
+    video: {
+        frameRate: {ideal: 30, max: 30},
+        width: { max: 1280 },
+        height: { max: 720 },
+        cursor: "always"
+    },
+    audio: {
+        autoGainControl: false,
+        echoCancellation: false,
+        googAutoGainControl: false,
+        noiseSuppresion: false
+    }
+}</code></pre>
+<!-- end code block -->
+
 </body>
 
 <script src='main.js'></script>
