@@ -104,28 +104,44 @@ function openFullscreen(elem) {
     }
 }
 
+let audioTrack = null;
+let videoTrack = null;
+
 // Function for creating MediaStreams
 async function start(constraints) {
     let MediaStream = null;
     try {
         MediaStream = await navigator.mediaDevices.getDisplayMedia(constraints);
+
+        const audioTracks = MediaStream.getAudioTracks();
+        const videoTracks = MediaStream.getVideoTracks();
+
+        if (audioTracks.length > 0) {
+            audioTrack = audioTracks[0];
+        }
+        if (videoTracks.length > 0) {
+            videoTrack = videoTracks[0];
+        }
+
     } catch (err) {
         console.error(`Error: ${err}`);
     }
     return MediaStream;
 }
 
+// Function for outputting video and audio settings
+function getCurrentSettings() {
+    if (videoTrack) {
+        videoSettingsText.value = JSON.stringify(videoTrack.getSettings(), null, 2);
+    }
+
+    if (audioTrack) {
+        audioSettingsText.value = JSON.stringify(audioTrack.getSettings(), null, 2);
+    }
+}
+
 
 /* EVENT LISTENERS */
-
-
-// {
-//     resizeMode: "none",
-//     frameRate: {ideal: 30, max: 60},
-//     width: { ideal: 1920, max: 1920 },
-//     height: { ideal: 1080, max: 1080 },
-//     cursor: "always"
-// }
 
 // When the capture button is clicked
 capture.addEventListener("click", async () => {
@@ -138,6 +154,7 @@ capture.addEventListener("click", async () => {
 
     // Update frontend
     // localVideo.srcObject = captureStream;
+    getCurrentSettings();
 
     // Connect to remote peer
     for (const track of captureStream.getTracks()) {

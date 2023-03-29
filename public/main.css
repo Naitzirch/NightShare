@@ -21,9 +21,14 @@ video {
     margin: auto;
 }
 
+#settingsContainer {
+    display: flex;
+    justify-content: center;
+    column-gap: 1em;
+}
+
 pre {
     width: 30em;
-    margin: auto;
     padding: 1em;
     outline: 0px solid transparent;
     background: hsl(30,80%,90%);
