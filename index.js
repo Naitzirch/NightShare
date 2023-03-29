@@ -24,9 +24,7 @@ io.on('connection', function(socket) {
     
     //var msg = {};
     socket.on('message', function(data) {
-        console.log(data, socket.id);
         if (socket.id == connectionArray[0].id) {
-            console.log("YEET");
             connectionArray[1].send(data);
         }
         else {

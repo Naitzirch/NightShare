@@ -6,7 +6,13 @@ const videos = document.querySelectorAll("video");
 const settings = document.getElementById("settings");
 
 // Make socket connection (which will function as signaling channel)
-var socket = io.connect('http://naitzirch.ddns.net', { secure: false, port: 80});
+var socket;
+if (false) {
+    socket = io.connect('http://localhost:3000');
+}
+else {
+    socket = io.connect('http://naitzirch.ddns.net', { secure: false, port: 80});
+}
 
 // Array of users
 let userArray = [];
@@ -112,17 +118,6 @@ async function start(constraints) {
     let MediaStream = null;
     try {
         MediaStream = await navigator.mediaDevices.getDisplayMedia(constraints);
-
-        const audioTracks = MediaStream.getAudioTracks();
-        const videoTracks = MediaStream.getVideoTracks();
-
-        if (audioTracks.length > 0) {
-            audioTrack = audioTracks[0];
-        }
-        if (videoTracks.length > 0) {
-            videoTrack = videoTracks[0];
-        }
-
     } catch (err) {
         console.error(`Error: ${err}`);
     }
@@ -130,13 +125,23 @@ async function start(constraints) {
 }
 
 // Function for outputting video and audio settings
-function getCurrentSettings() {
+function getCurrentSettings(stream) {
+    const audioTracks = stream.getAudioTracks();
+    const videoTracks = stream.getVideoTracks();
+
+    if (audioTracks.length > 0) {
+        audioTrack = audioTracks[0];
+    }
+    if (videoTracks.length > 0) {
+        videoTrack = videoTracks[0];
+    }
+
     if (videoTrack) {
-        videoSettingsText.value = JSON.stringify(videoTrack.getSettings(), null, 2);
+        videoSettingsText.innerText = JSON.stringify(videoTrack.getSettings(), null, 2);
     }
 
     if (audioTrack) {
-        audioSettingsText.value = JSON.stringify(audioTrack.getSettings(), null, 2);
+        audioSettingsText.innerText = JSON.stringify(audioTrack.getSettings(), null, 2);
     }
 }
 
@@ -154,7 +159,7 @@ capture.addEventListener("click", async () => {
 
     // Update frontend
     // localVideo.srcObject = captureStream;
-    getCurrentSettings();
+    getCurrentSettings(captureStream);
 
     // Connect to remote peer
     for (const track of captureStream.getTracks()) {
